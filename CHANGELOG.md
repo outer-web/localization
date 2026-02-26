@@ -2,6 +2,12 @@
 
 All notable changes to `localization` will be documented in this file.
 
+## 1.1.1 - 2026-02-26
+
+### Fixed
+
+- Handle translatable model attributes used as route parameters
+
 ## 1.1.0 - 2025-02-27
 
 ### Added

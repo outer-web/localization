@@ -62,7 +62,7 @@ class Localization
     {
         return $this->listLocalizedRoutesForRoute(
             request()->route()->getName(),
-            request()->route()->originalParameters(),
+            request()->route()->parameters(),
             $absolute
         );
     }
@@ -78,11 +78,18 @@ class Localization
 
     public function localizedRoute(string $name, mixed $parameters = [], bool $absolute = true, ?string $locale = null): string
     {
+        $originalLocale = app()->getLocale();
         $locale = $locale ?: app()->getLocale();
+
+        app()->setLocale($locale);
 
         $name = $locale.'.'.$name;
 
-        return route($name, $parameters, $absolute);
+        $route = route($name, $parameters, $absolute);
+
+        app()->setLocale($originalLocale);
+
+        return $route;
     }
 
     public function registerRoutes($callback)
